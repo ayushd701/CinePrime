@@ -1,2 +1,3 @@
 import Sidenav from "./Sidenav";
-export {Sidenav}
+import Topnav from "./Topnav";
+export {Sidenav , Topnav}
