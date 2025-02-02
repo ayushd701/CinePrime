@@ -23,15 +23,11 @@ const HorCards = ({ setLoading }) => {
     GetTrending();
   }, [setLoading , category]);
 
-  const handleChange = () => {
-
-  }
-
   return (
     <div className="w-full p-5">
       <div className="mb-5 flex justify-between">
         <h1 className="mb-5 text-3xl font-semibold text-zinc-400">Trending</h1>
-        <Dropdown title="Filter" options = {['all' ,'movie',"tv"]} />
+        <Dropdown title="Filter" options = {['all' ,'movie',"tv"]} func={(e) => setCategory(e.target.value)}  />
       </div>
 
       <div className="w-[100%] flex overflow-y-hidden mb-5">
