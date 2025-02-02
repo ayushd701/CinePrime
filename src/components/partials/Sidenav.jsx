@@ -6,53 +6,53 @@ export default function Sidenav() {
     {
       title: "Trending",
       to: "/",
-      icon : <i class="mr-2 ri-fire-fill"></i>
+      icon : <i className="mr-2 ri-fire-fill"></i>
     },
     {
       title: "Popular",
       to: "/",
-      icon : <i class="mr-2 ri-bard-fill"></i>
+      icon : <i className="mr-2 ri-bard-fill"></i>
     },
     {
       title: "Movies",
       to: "/",
-      icon : <i class="mr-2 ri-movie-2-fill"></i>
+      icon : <i className="mr-2 ri-movie-2-fill"></i>
     },
     {
       title: "Tv Shows",
       to: "/",
-      icon : <i class="mr-2 ri-tv-2-fill"></i>
+      icon : <i className="mr-2 ri-tv-2-fill"></i>
     },
     {
       title: "People",
       to: "/",
-      icon : <i class="mr-2 ri-team-fill"></i>
+      icon : <i className="mr-2 ri-team-fill"></i>
     }
   ];
   const navItems2 = [
     {
       title: "About",
       to: "/",
-      icon : <i class="mr-2 ri-information-fill"></i>
+      icon : <i className="mr-2 ri-information-fill"></i>
     },
     {
       title: "Contact Us",
       to: "/",
-      icon : <i class="mr-2 ri-phone-fill"></i>
+      icon : <i className="mr-2 ri-phone-fill"></i>
     },
   ];
   return (
     <div className="w-[20%] h-full border-r-2 border-zinc-300 p-8">
       <h1 className="text-2xl text-white font-bold">
-        <i class=" text-[#6556CD] ri-tv-fill mr-2"></i>
+        <i className=" text-[#6556CD] ri-tv-fill mr-2"></i>
         <span>CinePrime</span>
       </h1>
       <nav className="flex flex-col text-zinc-400 text-xl gap-2">
         <h1 className="text-xl text-white font-semibold mt-8 mb-4">
           New Feeds
         </h1>
-        {navItems1.map((item) => (
-          <Link to={item.to} className="hover:bg-[#6556CD] hover:text-white p-4 duration-300 rounded-lg" >{item.icon} {item.title}</Link>
+        {navItems1.map((item , index) => (
+          <Link key={index} to={item.to} className="hover:bg-[#6556CD] hover:text-white p-4 duration-300 rounded-lg" >{item.icon} {item.title}</Link>
         ))}
       </nav>
       <hr className="border-none h-[1px] bg-zinc-400 mt-1" />
@@ -60,8 +60,8 @@ export default function Sidenav() {
         <h1 className="text-xl text-white font-semibold mt-6 mb-4">
           Website Information
         </h1>
-        {navItems2.map((item) => (
-          <Link to={item.to} className="hover:bg-[#6556CD] hover:text-white p-4 duration-300 rounded-lg" >{item.icon} {item.title}</Link>
+        {navItems2.map((item , index) => (
+          <Link key={index} to={item.to} className="hover:bg-[#6556CD] hover:text-white p-4 duration-300 rounded-lg" >{item.icon} {item.title}</Link>
         ))}
       </nav>
     </div>
