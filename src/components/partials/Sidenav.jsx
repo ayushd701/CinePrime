@@ -42,7 +42,7 @@ export default function Sidenav() {
     },
   ];
   return (
-    <div className="w-[20%] h-full border-r-2 border-zinc-300 p-8">
+    <div className="w-[20%] h-full border-r-2 border-zinc-300 p-8 fixed">
       <h1 className="text-2xl text-white font-bold">
         <i className=" text-[#6556CD] ri-tv-fill mr-2"></i>
         <span>CinePrime</span>
