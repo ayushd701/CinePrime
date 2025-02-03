@@ -1,5 +1,5 @@
 import './App.css'
-import {Home ,Trending , Popular , Movies , Tv_Shows , People} from "./components/index"
+import {Home ,Trending , Popular , Movies , Tv_Shows , People , About , Contact} from "./components/index"
 import { Routes , Route } from 'react-router-dom'
 
 function App() {
@@ -13,6 +13,8 @@ function App() {
         <Route path="/movies" element = {<Movies />} ></Route>
         <Route path="/tv_shows" element = {<Tv_Shows />} ></Route>
         <Route path="/people" element = {<People />} ></Route>
+        <Route path="/about" element = {<About />} ></Route>
+        <Route path="/contact" element = {<Contact />} ></Route>
       </Routes>
     </div>
   )

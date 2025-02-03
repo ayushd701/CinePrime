@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "../../utils/axios";
-import {Dropdown} from "./partial"
+import { Dropdown } from "./partial";
 
-
-const HorCards = ({ setLoading , loading }) => {
+const HorCards = ({ setLoading, loading }) => {
   const [trending, setTrending] = useState([]);
-  const [category , setCategory] = useState("all")
+  const [category, setCategory] = useState("all");
 
   const GetTrending = async () => {
     try {
@@ -21,25 +20,29 @@ const HorCards = ({ setLoading , loading }) => {
   useEffect(() => {
     setLoading(true);
     GetTrending();
-  }, [setLoading , category]);
+  }, [setLoading, category]);
 
-  if(loading){
-    return (
-      <>
-      </>
-    )
+  if (loading) {
+    return <></>;
   }
 
   return (
     <div className="w-full p-5">
       <div className="mb-5 flex justify-between">
         <h1 className="mb-5 text-3xl font-semibold text-zinc-400">Trending</h1>
-        <Dropdown title="Filter" options = {['all' ,'movie',"tv"]} func={(e) => setCategory(e.target.value)}  />
+        <Dropdown title="Filter" func={(e) => setCategory(e.target.value)}>
+          <option value="all">All</option>
+          <option value="movie">Movie</option>
+          <option value="tv">Tv</option>
+        </Dropdown>
       </div>
 
       <div className="w-[100%] flex overflow-y-hidden">
         {trending.map((data, index) => (
-          <div key={index} className="min-w-[15%] bg-zinc-900 h-full mr-5 mb-5 hover:scale-[1.1] transform rounded-lg transition-transform duration-300">
+          <div
+            key={index}
+            className="min-w-[15%] bg-zinc-900 h-full mr-5 mb-5 hover:scale-[1.1] transform rounded-lg transition-transform duration-300"
+          >
             <img
               className="w-full h-[55%] object-cover rounded-t-lg"
               src={`https://image.tmdb.org/t/p/original/${
