@@ -5,7 +5,7 @@ export default function Sidenav() {
   const navItems1 = [
     {
       title: "Trending",
-      to: "/",
+      to: "/trending",
       icon : <i className="mr-2 ri-fire-fill"></i>
     },
     {
@@ -52,7 +52,7 @@ export default function Sidenav() {
           New Feeds
         </h1>
         {navItems1.map((item , index) => (
-          <Link key={index} to={item.to} className="hover:bg-[#6556CD] hover:text-white p-4 duration-300 rounded-lg" >{item.icon} {item.title}</Link>
+          <Link key={index} to={item.to} className="hover:bg-[#6556CD] hover:scale-105 hover:text-white p-4 duration-300 rounded-lg" >{item.icon} {item.title}</Link>
         ))}
       </nav>
       <hr className="border-none h-[1px] bg-zinc-400 mt-1" />

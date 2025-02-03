@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "../../utils/axios";
-import { Link } from "react-router-dom";
 import {Dropdown} from "./partial"
 
-const HorCards = ({ setLoading }) => {
+
+const HorCards = ({ setLoading , loading }) => {
   const [trending, setTrending] = useState([]);
   const [category , setCategory] = useState("all")
 
@@ -23,6 +23,13 @@ const HorCards = ({ setLoading }) => {
     GetTrending();
   }, [setLoading , category]);
 
+  if(loading){
+    return (
+      <>
+      </>
+    )
+  }
+
   return (
     <div className="w-full p-5">
       <div className="mb-5 flex justify-between">
@@ -30,11 +37,11 @@ const HorCards = ({ setLoading }) => {
         <Dropdown title="Filter" options = {['all' ,'movie',"tv"]} func={(e) => setCategory(e.target.value)}  />
       </div>
 
-      <div className="w-[100%] flex overflow-y-hidden mb-5">
+      <div className="w-[100%] flex overflow-y-hidden">
         {trending.map((data, index) => (
-          <div key={index} className="min-w-[15%] bg-zinc-900 h-full mr-5 mb-5">
+          <div key={index} className="min-w-[15%] bg-zinc-900 h-full mr-5 mb-5 hover:scale-[1.1] transform rounded-lg transition-transform duration-300">
             <img
-              className="w-full h-[55%] object-cover"
+              className="w-full h-[55%] object-cover rounded-t-lg"
               src={`https://image.tmdb.org/t/p/original/${
                 data.backdrop_path || data.poster_path
               }`}

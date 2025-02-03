@@ -1,8 +1,9 @@
 import axios from "../../utils/axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import {Loading} from "../index";
 
-const Header = ({ setLoading }) => {
+const Header = ({ setLoading , loading }) => {
   const [wallpaper, setWallpaper] = useState(null);
 
   const GetWall = async () => {
@@ -26,7 +27,7 @@ const Header = ({ setLoading }) => {
   if (!wallpaper) {
     return (
       <div className="text-white h-full w-screen absolute top-0 left-0 flex bg-black">
-        Loading...
+        <Loading />
       </div>
     );
   }

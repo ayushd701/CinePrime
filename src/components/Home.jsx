@@ -9,8 +9,8 @@ const Home = () => {
       <Sidenav />
       <div className="w-[80%] h-full ml-[20%] overflow-auto overflow-x-hidden">
         {!loading && <Topnav />}
-        <Header setLoading={setLoading} />
-        <HorCards setLoading={setLoading}  />
+        <Header setLoading={setLoading} loading={loading} />
+        <HorCards setLoading={setLoading} loading={loading}  />
       </div>
     </>
   ) 

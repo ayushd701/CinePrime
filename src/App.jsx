@@ -1,5 +1,5 @@
 import './App.css'
-import {Home} from "./components/index"
+import {Home ,Trending} from "./components/index"
 import { Routes , Route } from 'react-router-dom'
 
 function App() {
@@ -8,6 +8,7 @@ function App() {
     <div className='bg-[#1F1E24] w-full h-full flex'>
       <Routes>
         <Route path="/" element = {<Home />} ></Route>
+        <Route path="/trending" element = {<Trending />} ></Route>
       </Routes>
     </div>
   )
