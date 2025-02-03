@@ -13,9 +13,9 @@ const Trending = () => {
   const GetTrending = async () => {
     try {
       const { data } = await axios.get(`/trending/${category}/${duration}`);
-    //   setTrending(data.results);
-    setTrending(data.results)
-    console.log(data); 
+      //   setTrending(data.results);
+      setTrending(data.results);
+      console.log(data);
     } catch (error) {
       console.log("Error getting trending");
     }
@@ -37,20 +37,19 @@ const Trending = () => {
         </h1>
         <div className="flex items-center w-[80%]">
           <Topnav />
-          <Dropdown
-            title="Category"
-            options={["all", "movie", "tv"]}
-            func={(e) => setCategory(e.target.value)}
-          />
+          <Dropdown title="Category" func={(e) => setCategory(e.target.value)}>
+            <option value="all">All</option>
+            <option value="movie">Movie</option>
+            <option value="tv">Tv</option>
+          </Dropdown>
           <div className="w-[2%]"></div>
-          <Dropdown
-            title="Duration"
-            options={["day", "week"]}
-            func={(e) => setDuration(e.target.value)}
-          />
+          <Dropdown title="Category" func={(e) => setDuration(e.target.value)}>
+            <option value="day">Day</option>
+            <option value="week">Week</option>
+          </Dropdown>
         </div>
       </div>
-        <Cards data={trending} title={category} />
+      <Cards data={trending} />
     </div>
   ) : (
     <Loading />

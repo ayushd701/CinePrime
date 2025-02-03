@@ -4,26 +4,25 @@ import { Topnav, Dropdown, Cards } from "./partials/partial";
 import { Loading } from "./index";
 import axios from "../utils/axios";
 
-const Popular = () => {
-  document.title = "Popular ";
+const People = () => {
+  document.title = "People";
   const navigate = useNavigate();
-  const [category, setCategory] = useState("movie");
-  const [popular, setPopular] = useState([]);
-  const GetPopular = async () => {
+  const [people, setPeople] = useState([]);
+  const GetPeople = async () => {
     try {
-      const { data } = await axios.get(`${category}/popular`);
-      setPopular(data.results);
+      const { data } = await axios.get("/person/popular");
+      setPeople(data.results);
       console.log(data);
     } catch (error) {
-      console.log("Error getting popular");
+      console.log("Error getting people");
     }
   };
 
   useEffect(() => {
-    GetPopular();
-  }, [category]);
+    GetPeople();
+  }, []);
 
-  return popular.length > 0 ? (
+  return people.length > 0 ? (
     <div className=" p-[1.5%] bg-[#1F1E24] w-full h-screen overflow-y-auto">
       <div className="px-[5%] w-full flex items-center justify-between">
         <h1 className="text-3xl font-semibold text-zinc-400 ml-3">
@@ -31,22 +30,18 @@ const Popular = () => {
             onClick={() => navigate(-1)}
             className="hover:text-[#6556CD] mr-2  ri-arrow-left-line"
           ></i>{" "}
-          Popular
+          People
         </h1>
         <div className="flex items-center w-[80%]">
           <Topnav />
-          <Dropdown title="Category" func={(e) => setCategory(e.target.value)}>
-            <option value="movie">Movie</option>
-            <option value="tv">Tv</option>
-          </Dropdown>
           <div className="w-[2%]"></div>
         </div>
       </div>
-      <Cards data={popular}/>
+      <Cards data={people}/>
     </div>
   ) : (
     <Loading />
   );
 };
 
-export default Popular;
+export default People;

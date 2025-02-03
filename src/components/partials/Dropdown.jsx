@@ -1,13 +1,11 @@
 import React from 'react'
 
-const Dropdown = ({title, options , func}) => {
+const Dropdown = ({title, func , children}) => {
   return (
     <div className='select'>
         <select onChange={func} defaultValue="0" name="format" id="format">
           <option value={title} disabled>{title}</option>
-            {options && options.map((o,i) => 
-            <option key={i} value={o} >{o.toUpperCase()}</option>
-            )}
+            {children}
         </select>
     </div>
   )

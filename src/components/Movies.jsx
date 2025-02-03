@@ -37,13 +37,17 @@ const Movies = () => {
           <Topnav />
           <Dropdown
             title="Category"
-            options={["now_playing", "popular" , "top_rated" , "upcoming"]}
             func={(e) => setCategory(e.target.value)}
-          />
+          >
+            <option value="now_playing">Now Playing</option>
+            <option value="upcoming">Upcoming</option>
+            <option value="top_rated">Top Rated</option>
+            <option value="popular">Popular</option>
+          </Dropdown>
           <div className="w-[2%]"></div>
         </div>
       </div>
-      <Cards data={movies} title={category} />
+      <Cards data={movies}/>
     </div>
   ) : (
     <Loading />
