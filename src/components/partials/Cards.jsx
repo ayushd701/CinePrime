@@ -5,7 +5,7 @@ const Cards = ({ data, title }) => {
   return (
     <div className="pl-[9%] pt-[5%] flex flex-wrap w-[100%] ">
       {data.map((c, i) => (
-        <Link className="w-[25vh] mb-[5%] mr-[5%]" key={i}>
+        <Link className="w-[25vh] mb-[5%] mr-[5%] hover:scale-105 duration-300" key={i}>
           <img
             className="shadow-[8px_17px_38px_2px_rgba(0,0,0,0.5)] h-[40vh] object-cover"
             src={`https://image.tmdb.org/t/p/original/${

@@ -10,34 +10,34 @@ export default function Sidenav() {
     },
     {
       title: "Popular",
-      to: "/",
+      to: "/popular",
       icon : <i className="mr-2 ri-bard-fill"></i>
     },
     {
       title: "Movies",
-      to: "/",
+      to: "/movies",
       icon : <i className="mr-2 ri-movie-2-fill"></i>
     },
     {
       title: "Tv Shows",
-      to: "/",
+      to: "/tv_shows",
       icon : <i className="mr-2 ri-tv-2-fill"></i>
     },
     {
       title: "People",
-      to: "/",
+      to: "/people",
       icon : <i className="mr-2 ri-team-fill"></i>
     }
   ];
   const navItems2 = [
     {
       title: "About",
-      to: "/",
+      to: "/about",
       icon : <i className="mr-2 ri-information-fill"></i>
     },
     {
       title: "Contact Us",
-      to: "/",
+      to: "/contact",
       icon : <i className="mr-2 ri-phone-fill"></i>
     },
   ];
