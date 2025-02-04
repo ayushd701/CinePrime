@@ -15,17 +15,17 @@ export default function Sidenav() {
     },
     {
       title: "Movies",
-      to: "/movies",
+      to: "/movie",
       icon : <i className="mr-2 ri-movie-2-fill"></i>
     },
     {
       title: "Tv Shows",
-      to: "/tv_shows",
+      to: "/tv",
       icon : <i className="mr-2 ri-tv-2-fill"></i>
     },
     {
       title: "People",
-      to: "/people",
+      to: "/person",
       icon : <i className="mr-2 ri-team-fill"></i>
     }
   ];

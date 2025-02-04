@@ -49,7 +49,7 @@ const Topnav = () => {
       )}
 
       {showResults && (
-        <div className="absolute flex flex-col w-full ml-20 max-w-lg max-h-60 bg-white shadow-lg top-[100%] left-4 rounded-lg overflow-auto ">
+        <div className="z-10 absolute flex flex-col w-full ml-20 max-w-lg max-h-60 bg-white shadow-lg top-[100%] left-4 rounded-lg overflow-auto ">
           {searches.map((item, index) => (
             <Link
               key={index}

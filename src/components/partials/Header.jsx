@@ -33,7 +33,7 @@ const Header = ({ setLoading , loading }) => {
   }
 
   return (
-    <div
+    <Link to={`${wallpaper.media_type}/details/${wallpaper.id}`}
       style={{
         background: `linear-gradient(rgba(0, 0, 0, .2), rgba(0, 0, 0, .5), rgba(0, 0, 0, .8)), url(https://image.tmdb.org/t/p/original/${
           wallpaper.backdrop_path || wallpaper.profile_path
@@ -56,7 +56,7 @@ const Header = ({ setLoading , loading }) => {
         <i className="ml-3 text-yellow-400 ri-album-fill" ></i> {wallpaper.media_type.toUpperCase()}
       </p>
       <Link className="bg-[#6556CD] p-2 mt-5 rounded font-semibold"> {""}  Watch Trailer</Link>
-    </div>
+    </Link>
   );
 };
 

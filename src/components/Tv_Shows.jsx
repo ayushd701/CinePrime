@@ -31,7 +31,7 @@ const Tv_Shows = () => {
             onClick={() => navigate(-1)}
             className="hover:text-[#6556CD] mr-2 ri-arrow-left-line"
           ></i>{" "}
-          Top Movies
+          Tv Shows
         </h1>
         <div className="flex items-center w-[80%]">
           <Topnav />
@@ -47,7 +47,7 @@ const Tv_Shows = () => {
           <div className="w-[2%]"></div>
         </div>
       </div>
-      <Cards data={topMovies}/>
+      <Cards data={topMovies} title="tv" />
     </div>
   ) : (
     <Loading />

@@ -19,10 +19,10 @@ const Contact = () => {
     },
   ];
   return (
-    <div className="bg-gradient-to-r from-slate-700 to-gray-900 w-full h-screen flex justify-center items-center">
-      <div className="w-[50%] h-auto rounded-lg p-[2%] hover:scale-105 duration-500 bg-gray-800 overflow-hidden">
+    <div className="bg-[#1F1E24] w-full h-screen flex justify-center items-center">
+      <div className="w-[50%] h-auto rounded-lg p-[2%] hover:scale-105 duration-500 bg-gray-600 overflow-hidden">
         <div className="flex justify-center flex-col items-center h-[90%]">
-          <h1 className=" text-3xl font-extrabold text-blue-400">
+          <h1 className=" text-3xl font-extrabold text-blue-200">
             Get in Touch
           </h1>
           <p className="mt-[3%] text-lg text-white">
@@ -30,7 +30,7 @@ const Contact = () => {
             contact details below.
           </p>
         </div>
-        <ul className="flex justify-around text-gray-400 text-xl mt-[3%]">
+        <ul className="flex justify-around text-gray-300 text-xl mt-[3%]">
           {items.map((item, index) => (
             <li key={index}>
               {item.icon}

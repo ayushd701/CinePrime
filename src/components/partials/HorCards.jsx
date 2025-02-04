@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "../../utils/axios";
 import { Dropdown } from "./partial";
+import { Link } from "react-router-dom";
 
 const HorCards = ({ setLoading, loading }) => {
   const [trending, setTrending] = useState([]);
@@ -39,7 +40,8 @@ const HorCards = ({ setLoading, loading }) => {
 
       <div className="w-[100%] flex overflow-y-hidden">
         {trending.map((data, index) => (
-          <div
+          <Link
+            to={`/${data.media_type}/details/${data.id}`}
             key={index}
             className="min-w-[15%] bg-zinc-900 h-full mr-5 mb-5 hover:scale-[1.1] transform rounded-lg transition-transform duration-300"
           >
@@ -63,7 +65,7 @@ const HorCards = ({ setLoading, loading }) => {
                 <span className="text-zinc-300">..more</span>{" "}
               </p>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

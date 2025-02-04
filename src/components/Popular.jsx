@@ -42,7 +42,7 @@ const Popular = () => {
           <div className="w-[2%]"></div>
         </div>
       </div>
-      <Cards data={popular}/>
+      <Cards data={popular} title={category} />
     </div>
   ) : (
     <Loading />

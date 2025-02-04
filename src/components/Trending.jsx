@@ -49,7 +49,7 @@ const Trending = () => {
           </Dropdown>
         </div>
       </div>
-      <Cards data={trending} />
+      <Cards data={trending} title= {category}/>
     </div>
   ) : (
     <Loading />

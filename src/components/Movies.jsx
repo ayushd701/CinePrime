@@ -47,7 +47,7 @@ const Movies = () => {
           <div className="w-[2%]"></div>
         </div>
       </div>
-      <Cards data={movies}/>
+      <Cards data={movies} title="movie" />
     </div>
   ) : (
     <Loading />

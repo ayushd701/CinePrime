@@ -37,7 +37,7 @@ const People = () => {
           <div className="w-[2%]"></div>
         </div>
       </div>
-      <Cards data={people}/>
+      <Cards data={people} title="person"/>
     </div>
   ) : (
     <Loading />
