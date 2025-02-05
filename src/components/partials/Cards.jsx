@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Cards = ({ data , title}) => {
+const Cards = ({ data , title = ""}) => {
   return (
     <div className="pl-[9%] pt-[5%] flex flex-wrap w-[100%] ">
       {data.map((c, i) => (

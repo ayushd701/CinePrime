@@ -55,7 +55,7 @@ const Header = ({ setLoading , loading }) => {
         <i className="text-yellow-400  ri-megaphone-fill" ></i> {wallpaper.release_date || "No information"} 
         <i className="ml-3 text-yellow-400 ri-album-fill" ></i> {wallpaper.media_type.toUpperCase()}
       </p>
-      <Link className="bg-[#6556CD] p-2 mt-5 rounded font-semibold"> {""}  Watch Trailer</Link>
+      <Link className="bg-[#6556CD] p-2 mt-5 rounded font-semibold"> <i className="ri-play-circle-fill"></i>  Watch Trailer</Link>
     </Link>
   );
 };

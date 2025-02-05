@@ -19,7 +19,7 @@ const HorCards = ({ setLoading, loading }) => {
   };
 
   useEffect(() => {
-    setLoading(true);
+    setLoading(true)
     GetTrending();
   }, [setLoading, category]);
 
