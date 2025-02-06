@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import { asyncloadmovie, removeMovie } from "../store/actions/MovieActions";
 import Loading from "./Loading";
 import website from "/website.png";
@@ -8,7 +8,7 @@ import wikipedia from "/wikipedia.png";
 import imdb from "/imdb.png";
 
 const Moviedetails = () => {
-  const loc = useLocation();
+  const loca = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -24,7 +24,7 @@ const Moviedetails = () => {
   return info ? (
     <div
       style={{
-        background: `linear-gradient(rgba(0, 0, 0, .2), rgba(0, 0, 0, .5), rgba(0, 0, 0, .8)), url(https://image.tmdb.org/t/p/original/${info.details.backdrop_path})`,
+        background: `linear-gradient(rgba(0, 0, 0, .9), rgba(0, 0, 0, .5), rgba(0, 0, 0, .8)), url(https://image.tmdb.org/t/p/original/${info.details.backdrop_path})`,
         backgroundPosition: "center",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
@@ -32,26 +32,34 @@ const Moviedetails = () => {
       className="bg-[#1F1E24] w-[100%] px-[6%] "
     >
       {/* Part 1 navigation */}
-      <nav className="w-full text-zinc-100 flex gap-10 text-2xl h-[10vh] items-center z-10 mb-3 mt-1">
-        <Link
-          onClick={() => navigate(-1)}
-          className="hover:text-[#587bb4] mr-2  ri-arrow-left-line"
-        ></Link>
-        <a target="_blank" href={info.details.homepage}>
-          <img className="w-[4vh] rounded-md" src={website} alt="" />
-        </a>
-        <a
-          target="_blank"
-          href={`https://www.wikidata.org/wiki/${info.externalid.wikidata_id}`}
-        >
-          <img className="w-[4vh] rounded-md" src={wikipedia} alt="" />
-        </a>
-        <a
-          target="_blank"
-          href={`https://www.imdb.com/title/${info.externalid.imdb_id}`}
-        >
-          <img className="w-[4vh] rounded-md" src={imdb} alt="" />
-        </a>
+      <nav className="w-full text-zinc-100 flex gap-10 text-3xl h-[10vh] items-center z-10 mb-3 mt-1 justify-between">
+        <div className="flex gap-x-10 ">
+          <Link
+            onClick={() => navigate(-1)}
+            className="hover:text-[#587bb4] mr-2  ri-arrow-left-line"
+          ></Link>
+          <Link
+            to="/"
+            className="hover:text-[#587bb4] mr-2  ri-home-4-line"
+          ></Link>
+        </div>
+        <div className="flex  gap-x-10 p-5">
+          <a target="_blank" href={info.details.homepage}>
+            <img className="w-[4vh] rounded-md" src={website} alt="" />
+          </a>
+          <a
+            target="_blank"
+            href={`https://www.wikidata.org/wiki/${info.externalid.wikidata_id}`}
+          >
+            <img className="w-[4vh] rounded-md" src={wikipedia} alt="" />
+          </a>
+          <a
+            target="_blank"
+            href={`https://www.imdb.com/title/${info.externalid.imdb_id}`}
+          >
+            <img className="w-[4vh] rounded-md" src={imdb} alt="" />
+          </a>
+        </div>
       </nav>
 
       {/* Part 2 poster */}
@@ -98,7 +106,7 @@ const Moviedetails = () => {
             </div>
             <Link
               className="bg-yellow-600 p-1 text-black rounded"
-              to={`${loc}/trailer`}
+              to={`${loca.pathname}/trailer`}
             >
               <i className="ri-play-circle-fill"></i> Play Trailer
             </Link>
@@ -107,7 +115,7 @@ const Moviedetails = () => {
       </div>
 
       {/* Part 3 details */}
-      <div className="w-[80%] flex flex-col gap-y-5 mt-10">
+      <div className="w-[80%] flex flex-col gap-y-5 mt-10 mb-5">
         {info.watchproviders && info.watchproviders.flatrate && (
           <div className="flex gap-x-5 items-center text-white">
             <h1 className="bg-gray-800 p-2 rounded-md">
@@ -162,7 +170,10 @@ const Moviedetails = () => {
         Recommendations and Similar
       </div>
       <div className="w-[100%] h-[35vh] flex overflow-y-hidden  mb-3">
-        {(info.recommendations.length > 0 ? info.recommendations : info.similar).map((data, index) => (
+        {(info.recommendations.length > 0
+          ? info.recommendations
+          : info.similar
+        ).map((data, index) => (
           <Link
             to={`/${data.media_type}/details/${data.id}`}
             key={index}
@@ -191,6 +202,7 @@ const Moviedetails = () => {
           </Link>
         ))}
       </div>
+      <Outlet />
     </div>
   ) : (
     <Loading />
