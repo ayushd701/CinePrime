@@ -1,6 +1,7 @@
 import React from "react";
 
 const Contact = () => {
+  document.title= "Contact us"
   const items = [
     {
       name: "Email",

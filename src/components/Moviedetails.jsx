@@ -19,7 +19,12 @@ const Moviedetails = () => {
     };
   }, [id]);
   const { info } = useSelector((state) => state.movie);
-  console.log(info);
+
+  useEffect(() => {
+    if (info && info.details) {
+      document.title = `${info.details.title || info.details.original_title}`;
+    }
+  }, [info]);
 
   return info ? (
     <div
@@ -86,7 +91,7 @@ const Moviedetails = () => {
 
           <div className="flex  text-zinc-100 gap-5 mt-5 flex-col items-start">
             <h1 className="italic font-semibold">{info.details.tagline}</h1>
-            <p>Overview : {info.details.overview}</p>
+            <p className="line-clamp-2">Overview : {info.details.overview}</p>
             <div>
               <span className="w-[5vh] h-[5vh] rounded-full flex justify-center items-center bg-yellow-600 text-xl font-semibold ">
                 {(info.details.vote_average * 10).toFixed()}
@@ -170,12 +175,12 @@ const Moviedetails = () => {
         Recommendations and Similar
       </div>
       <div className="w-[100%] h-[35vh] flex overflow-y-hidden  mb-3">
-        {(info.recommendations.length > 0
+        { (info.recommendations.length > 0 || info.similar.length > 0) ? (info.recommendations.length > 0
           ? info.recommendations
           : info.similar
         ).map((data, index) => (
           <Link
-            to={`/${data.media_type}/details/${data.id}`}
+            to={`/${data.release_date ? "movie" : "tv"}/details/${data.id}`}
             key={index}
             className="min-w-[15%] bg-zinc-900 h-full mr-5 mb-5 hover:scale-[1.1] transform rounded-lg transition-transform duration-300"
           >
@@ -200,7 +205,7 @@ const Moviedetails = () => {
               </p>
             </div>
           </Link>
-        ))}
+        )) : <h1 className="text-3xl text-white font-black text-center mt-5" >Nothing to show</h1>}
       </div>
       <Outlet />
     </div>

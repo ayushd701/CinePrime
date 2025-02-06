@@ -10,4 +10,5 @@ import Contact from "./Contact";
 import Moviedetails from "./Moviedetails";
 import Tvdetails from "./Tvdetails";
 import Persondetails from "./Persondetails";
-export {Home , Loading , Trending , Popular , Movies ,Tv_Shows , People , About , Contact , Moviedetails , Tvdetails , Persondetails}
+import Notfound from "./Notfound";
+export {Home , Loading , Trending , Popular , Movies ,Tv_Shows , People , About , Contact , Moviedetails , Tvdetails , Persondetails , Notfound}

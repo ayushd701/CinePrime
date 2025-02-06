@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Logo from "/Logo.png"
 
 export default function Sidenav() {
   const navItems1 = [
@@ -44,6 +45,7 @@ export default function Sidenav() {
   return (
     <div className="w-[20%] h-full border-r-2 border-zinc-300 p-8 fixed">
       <h1 className="text-2xl text-white font-bold">
+        {/* <img className="h-[50px] w-[100px]" src="./Logo.png" alt="" /> */}
         <i className=" text-[#6556CD] ri-tv-fill mr-2"></i>
         <span>CinePrime</span>
       </h1>
