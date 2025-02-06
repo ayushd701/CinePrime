@@ -6,7 +6,6 @@ import Loading from "./Loading";
 import website from "/website.png";
 import wikipedia from "/wikipedia.png";
 import imdb from "/imdb.png";
-import Cards from "./partials/Cards";
 
 const Moviedetails = () => {
   const loc = useLocation();
@@ -30,7 +29,7 @@ const Moviedetails = () => {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
       }}
-      className="bg-[#1F1E24] w-screen h-full px-[6%] "
+      className="bg-[#1F1E24] w-[100%] px-[6%] "
     >
       {/* Part 1 navigation */}
       <nav className="w-full text-zinc-100 flex gap-10 text-2xl h-[10vh] items-center z-10 mb-3 mt-1">
@@ -156,11 +155,42 @@ const Moviedetails = () => {
           </div>
         )}
       </div>
-      <hr className="mb-2"/>
+      <hr className="mb-5" />
 
-      {/* Part 4 recommendations */}
-      <div className="text-3xl text-white text-center font-black">Recommendations and Similar</div>
-      <Cards data={info.recommendations.length > 0 ? info.recommendations : info.similar} />
+      {/* Part 4 recommendations , Hor cards section */}
+      <div className="text-3xl text-white text-center font-black mb-5">
+        Recommendations and Similar
+      </div>
+      <div className="w-[100%] h-[35vh] flex overflow-y-hidden  mb-3">
+        {(info.recommendations.length > 0 ? info.recommendations : info.similar).map((data, index) => (
+          <Link
+            to={`/${data.media_type}/details/${data.id}`}
+            key={index}
+            className="min-w-[15%] bg-zinc-900 h-full mr-5 mb-5 hover:scale-[1.1] transform rounded-lg transition-transform duration-300"
+          >
+            <img
+              className="w-full h-[55%] object-cover rounded-t-lg"
+              src={`https://image.tmdb.org/t/p/original/${
+                data.backdrop_path || data.poster_path
+              }`}
+              alt=""
+            />
+
+            <div className="text-white p-3 h-[45%]">
+              <h1 className="text-xl font-semibold truncate">
+                {data.name ||
+                  data.title ||
+                  data.original_name ||
+                  data.original_title}
+              </h1>
+              <p className="text-sm line-clamp-3">
+                {data.overview.slice(0, 100)}{" "}
+                <span className="text-zinc-300">..more</span>{" "}
+              </p>
+            </div>
+          </Link>
+        ))}
+      </div>
     </div>
   ) : (
     <Loading />
