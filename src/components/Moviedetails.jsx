@@ -175,37 +175,49 @@ const Moviedetails = () => {
         Recommendations and Similar
       </div>
       <div className="w-[100%] h-[35vh] flex overflow-y-hidden  mb-3">
-        { (info.recommendations.length > 0 || info.similar.length > 0) ? (info.recommendations.length > 0
-          ? info.recommendations
-          : info.similar
-        ).map((data, index) => (
-          <Link
-            to={`/${data.release_date ? "movie" : "tv"}/details/${data.id}`}
-            key={index}
-            className="min-w-[15%] bg-zinc-900 h-full mr-5 mb-5 hover:scale-[1.1] transform rounded-lg transition-transform duration-300"
-          >
-            <img
-              className="w-full h-[55%] object-cover rounded-t-lg"
-              src={`https://image.tmdb.org/t/p/original/${
-                data.backdrop_path || data.poster_path
-              }`}
-              alt=""
-            />
-
-            <div className="text-white p-3 h-[45%]">
-              <h1 className="text-xl font-semibold truncate">
-                {data.name ||
-                  data.title ||
-                  data.original_name ||
-                  data.original_title}
-              </h1>
-              <p className="text-sm line-clamp-3">
-                {data.overview.slice(0, 100)}{" "}
-                <span className="text-zinc-300">..more</span>{" "}
-              </p>
-            </div>
-          </Link>
-        )) : <h1 className="text-3xl text-white font-black text-center mt-5" >Nothing to show</h1>}
+        {info.recommendations.length > 0 || info.similar.length > 0 ? (
+                  (info.recommendations.length > 0
+                    ? info.recommendations
+                    : info.similar
+                  ).map((data, index) => (
+                    <Link
+                      to={`/${data.release_date ? "movie" : "tv"}/details/${data.id}`}
+                      key={index}
+                      className="min-w-[15%] bg-zinc-900 h-full mr-5 mb-5 hover:scale-[1.1] transform rounded-lg transition-transform duration-300"
+                    >
+                      {data.backdrop_path || data.poster_path ? (
+                        <img
+                          className="w-full h-[55%] object-cover rounded-t-lg"
+                          src={`https://image.tmdb.org/t/p/original/${
+                            data.backdrop_path || data.poster_path
+                          }`}
+                          alt=""
+                        />
+                      ) : (
+                        <h1 className="w-full h-[55%] object-cover rounded-t-lg text-white flex items-center justify-center">
+                          No image found
+                        </h1>
+                      )}
+        
+                      <div className="text-white p-3 h-[45%]">
+                        <h1 className="text-xl font-semibold truncate">
+                          {data.name ||
+                            data.title ||
+                            data.original_name ||
+                            data.original_title}
+                        </h1>
+                        <p className="text-sm line-clamp-3">
+                          {data.overview.slice(0, 100)}{" "}
+                          <span className="text-zinc-300">..more</span>{" "}
+                        </p>
+                      </div>
+                    </Link>
+                  ))
+                ) : (
+                  <h1 className="text-3xl text-white font-black text-center mt-5">
+                    Nothing to show
+                  </h1>
+                )}
       </div>
       <Outlet />
     </div>

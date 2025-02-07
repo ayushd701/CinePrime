@@ -34,7 +34,6 @@ const Header = ({ setLoading, loading }) => {
 
   return (
     <Link
-      to={`${wallpaper.media_type}/details/${wallpaper.id}`}
       style={{
         background: `linear-gradient(rgba(0, 0, 0, .2), rgba(0, 0, 0, .5), rgba(0, 0, 0, .8)), url(https://image.tmdb.org/t/p/original/${
           wallpaper.backdrop_path || wallpaper.profile_path
@@ -53,7 +52,7 @@ const Header = ({ setLoading, loading }) => {
       </h1>
       <p className="w-[70%] text-white mt-3 mb-3">
         {wallpaper.overview.slice(0, 200)}{" "}
-        <Link className="text-blue-400">..more</Link>{" "}
+        <Link to={`${wallpaper.media_type}/details/${wallpaper.id}`} className="text-blue-400">..more</Link>{" "}
       </p>
       <p className="text-white">
         <i className="text-yellow-400  ri-megaphone-fill"></i>{" "}

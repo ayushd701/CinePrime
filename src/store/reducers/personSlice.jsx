@@ -11,7 +11,7 @@ export const personSlice = createSlice({
     loadPerson: (state, action) => {
       state.info = action.payload;
     },
-    removePerson: (state, action) => {
+    removePerson: (state) => {
       state.info = null;
     },
   },

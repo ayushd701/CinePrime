@@ -177,7 +177,7 @@ const Tvdetails = () => {
       </div>
       <hr className="mb-5" />
 
-      {/* Part 4 seasons , Hor cards section */}
+      {/* Part 4 seasons  */}
       <div className="text-3xl text-white text-center font-black mb-5">
         Seasons
       </div>

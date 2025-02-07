@@ -19,7 +19,7 @@ const HorCards = ({ setLoading, loading }) => {
   };
 
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
     GetTrending();
   }, [setLoading, category]);
 
@@ -45,13 +45,19 @@ const HorCards = ({ setLoading, loading }) => {
             key={index}
             className="min-w-[15%] bg-zinc-900 h-full mr-5 mb-5 hover:scale-[1.1] transform rounded-lg transition-transform duration-300"
           >
-            <img
-              className="w-full h-[55%] object-cover rounded-t-lg"
-              src={`https://image.tmdb.org/t/p/original/${
-                data.backdrop_path || data.poster_path
-              }`}
-              alt=""
-            />
+            {data.backdrop_path || data.poster_path ? (
+              <img
+                className="w-full h-[55%] object-cover rounded-t-lg"
+                src={`https://image.tmdb.org/t/p/original/${
+                  data.backdrop_path || data.poster_path
+                }`}
+                alt=""
+              />
+            ) : (
+              <h1 className="w-full h-[55%] object-cover rounded-t-lg text-white flex items-center justify-center">
+                No image found
+              </h1>
+            )}
 
             <div className="text-white p-3 h-[45%]">
               <h1 className="text-xl font-semibold truncate">
