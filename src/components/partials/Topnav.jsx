@@ -48,6 +48,17 @@ const Topnav = ({ mobileVersion }) => {
     return () => clearTimeout(timer);
   }, [query]);
 
+  useEffect(() => {
+    if (searches.length > 0) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [searches]);
+
   return (
     <div
       className={`relative z-[50] ${
@@ -82,20 +93,12 @@ const Topnav = ({ mobileVersion }) => {
         </div>
 
         {searches.length > 0 && (
-          <div
-            className={`${
-              mobileVersion ? "fixed" : "absolute"
-            } inset-0 z-[100] ${mobileVersion ? "pt-16 px-4 bg-black/50" : ""}`}
-          >
+          <div className="fixed top-16 left-0 w-full z-[100] px-4 pointer-events-none">
             {mobileVersion && (
               <div className="absolute inset-0" onClick={clearSearch} />
             )}
             <div
-              className={`absolute top-full left-0 right-0 mt-2 bg-zinc-900 z-[60] rounded-lg shadow-xl border border-zinc-700 max-h-[70vh] overflow-y-auto ${
-                mobileVersion
-                  ? "max-w-2xl mx-auto"
-                  : "absolute top-full left-0 right-0 mt-2"
-              }`}
+              className="bg-zinc-900 z-[110] rounded-lg shadow-xl border border-zinc-700 max-w-2xl mx-auto max-h-[70vh] overflow-y-auto pointer-events-auto"
               onClick={(e) => e.stopPropagation()}
             >
               {searches.map((item) => (
