@@ -1,168 +1,183 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Link,
-  Outlet,
-  useLocation,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
+import { Link, Outlet, useNavigate, useParams } from "react-router-dom";
 import { asyncloadperson, removePerson } from "../store/actions/PersonActions";
 import Loading from "./Loading";
-import wikipedia from "/wikipedia.png";
-import facebook from "/facebook.png";
-import instagram from "/instagram.jpg";
-import twitter from "/twitter.png";
+import { RiArrowLeftLine, RiHome4Line } from "react-icons/ri";
 
 const Persondetails = () => {
-  const loca = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
+
   useEffect(() => {
     dispatch(asyncloadperson(id));
     return () => {
       dispatch(removePerson());
     };
   }, [id]);
+
   const { info } = useSelector((state) => state.person);
-  console.log(info);
 
   useEffect(() => {
     if (info && info.details) {
       document.title = `${info.details.name}`;
     }
   }, [info]);
+
+  const [isExpanded, setIsExpanded] = useState(false);
+
   return info ? (
-    <div className="w-screen px-[8%] flex flex-col h-[100%] bg-[#1F1E24] mb-[1vh]">
-      {/* Part 1 navigation */}
-      <nav className="w-full text-zinc-100 flex gap-10 text-3xl h-[10vh] items-center z-10 mb-3 mt-1 justify-between">
-        <div className="flex gap-x-10 ">
-          <Link
+    <div
+      style={{
+        background: `linear-gradient(rgba(0, 0, 0, .9), rgba(0, 0, 0, .5), rgba(0, 0, 0, .8)), url(https://image.tmdb.org/t/p/original/${info.details.profile_path})`,
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+      }}
+      className="w-full min-h-screen px-4 md:px-[6%] py-6"
+    >
+      <nav className="w-full text-zinc-100 flex justify-between items-center h-[10vh] mb-6">
+        <div className="flex gap-6 text-2xl md:text-3xl">
+          <button
             onClick={() => navigate(-1)}
-            className="hover:text-[#587bb4] mr-2  ri-arrow-left-line"
-          ></Link>
-          <Link
-            to="/"
-            className="hover:text-[#587bb4] mr-2  ri-home-4-line"
-          ></Link>
+            className="hover:text-[#587bb4] transition-colors"
+          >
+            <RiArrowLeftLine />
+          </button>
+          <Link to="/" className="hover:text-[#587bb4] transition-colors">
+            <RiHome4Line />
+          </Link>
         </div>
       </nav>
-      {/* Part 2  */}
 
-      <div className="w-full flex flex-row mt-[1%]">
-        {/* {Part 2 Left poster } */}
-        <div className="w-[30%]">
+      <div className="flex flex-col lg:flex-row gap-8 w-full">
+        {/* Profile Image */}
+        <div className="w-full lg:w-1/3 flex justify-center">
           <img
-            className="shadow-[8px_17px_38px_2px_rgba(0,0,0,0.5)] h-[50vh] object-cover rounded-lg"
-            src={`https://image.tmdb.org/t/p/original/${
-              info.details.poster_path ||
-              info.details.backdrop_path ||
-              info.details.profile_path
-            }`}
-            alt=""
+            className="shadow-[8px_17px_38px_2px_rgba(0,0,0,0.5)] h-[50vh] md:h-[70vh] object-cover rounded-lg"
+            src={`https://image.tmdb.org/t/p/original/${info.details.profile_path}`}
+            alt={info.details.name}
           />
-          <hr className="mt-10 border-none h-[2px] bg-zinc-500 w-[70%]" />
-          <div className="flex gap-x-8 p-5 ">
-            {info.externalid.wikidata_id && <a
-              target="_blank"
-              href={`https://www.wikidata.org/wiki/${info.externalid.wikidata_id}`}
-            >
-              <img className="w-[4vh] rounded-md" src={wikipedia} alt="" />
-            </a>}
-            {info.externalid.facebook_id && <a
-              target="_blank"
-              href={`https://www.facebook.com/${info.externalid.facebook_id}`}
-            >
-              <img className="w-[4vh] rounded-md" src={facebook} alt="" />
-            </a>}
-            {info.externalid.instagram_id && <a
-              target="_blank"
-              href={`https://www.instagram.com/${info.externalid.instagram_id}`}
-            >
-              <img className="w-[4vh] rounded-md" src={instagram} alt="" />
-            </a>}
-            {info.externalid.twitter_id && <a
-              target="_blank"
-              href={`https://www.twitter.com/${info.externalid.twitter_id}`}
-            >
-              <img className="w-[4vh] rounded-md" src={twitter} alt="" />
-            </a>}
-          </div>
-          <h1 className="text-2xl text-zinc-400">Personal Information</h1>
-          {info.details.known_for_department && (
-            <h1 className=" text-zinc-400 mt-5">
-              Known For : {info.details.known_for_department}{" "}
-            </h1>
-          )}
-          {info.details.birthday && (
-            <h1 className=" text-zinc-400 mt-1">
-              Birthday : {info.details.birthday}{" "}
-            </h1>
-          )}
-          {info.details.place_of_birth && (
-            <h1 className=" text-zinc-400 mt-1">
-              Place of birth : {info.details.place_of_birth}{" "}
-            </h1>
-          )}
-          {info.details.gender && (
-            <h1 className=" text-zinc-400 mt-1">
-              Gender : {info.details.gender === 2 ? "Male" : "Female"}{" "}
-            </h1>
-          )}
-          {info.details.also_known_as && (
-            <h1 className=" text-zinc-400 mt-1">
-              Also known as : {info.details.also_known_as.join(" , ")}{" "}
-            </h1>
-          )}
         </div>
-        {/* {Part 2 Right details} */}
-        <div className="w-[70%]">
-          <h1 className="text-6xl text-zinc-400 font-black">
-            {info.details.name}
-          </h1>
-          {info.details.biography !== "" && (
-            <h1 className="text-xl text-zinc-400 mt-5 ">
-              Biography :{" "}
-              <p className="text-sm mt-2">{info.details.biography}</p>
-            </h1>
-          )}
-          <h1 className="text-xl text-zinc-400 mt-20 ">Known For :</h1>
-          <div className="w-[100%] h-[35%] flex overflow-y-hidden">
-            { ( info.combinedCredits.cast || info.combinedCredits.crew).map((data, index) => (
-              <Link
-                to={`/${data.media_type}/details/${data.id}`}
-                key={index}
-                className="min-w-[15%] bg-zinc-900 h-full mr-5 mb-5 hover:scale-[1.1] transform rounded-lg transition-transform duration-300"
-              >
-                {data.backdrop_path || data.poster_path ? (
-                  <img
-                    className="w-full h-[55%] object-cover rounded-t-lg"
-                    src={`https://image.tmdb.org/t/p/original/${
-                      data.backdrop_path || data.poster_path
-                    }`}
-                    alt=""
-                  />
-                ) : (
-                  <h1 className="w-full h-[55%] object-cover rounded-t-lg text-white flex items-center justify-center">
-                    No image found
-                  </h1>
-                )}
 
-                <div className="text-white p-3 h-[45%]">
-                  <h1 className="text-xl font-semibold truncate">
-                    {data.name ||
-                      data.title ||
-                      data.original_name ||
-                      data.original_title}
-                  </h1>
-                  <p className="text-sm line-clamp-3">
-                    {data.overview.slice(0, 100)}{" "}
-                    <span className="text-zinc-300">..more</span>{" "}
-                  </p>
-                </div>
-              </Link>
-            ))}
+        <div className="w-full lg:w-2/3 bg-[#2D2B32]/90 p-6 rounded-lg backdrop-blur-sm">
+          <div className="mb-6">
+            <h1 className="text-3xl md:text-5xl text-white font-bold mb-4">
+              {info.details.name}
+            </h1>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-zinc-100 mb-6">
+              <div>
+                {info.details.biography && (
+                  <>
+                    <h2 className="text-lg font-semibold text-zinc-300 mb-1">
+                      Biography
+                    </h2>
+                    <p className="text-zinc-200 transition-all">
+                      {isExpanded
+                        ? info.details.biography
+                        : `${info.details.biography.slice(0, 150)}...`}
+                    </p>
+                    <button
+                      onClick={() => setIsExpanded(!isExpanded)}
+                      className="mt-2 text-[#587bb4] hover:underline"
+                    >
+                      {isExpanded ? "Read Less" : "Read More"}
+                    </button>
+                  </>
+                )}
+              </div>
+
+              <div className="space-y-3">
+                {info.details.known_for_department && (
+                  <div>
+                    <span className="font-semibold">Known For : </span>
+                    {info.details.known_for_department}
+                  </div>
+                )}
+                {info.details.birthday && (
+                  <div>
+                    <span className="font-semibold">Birthday : </span>
+                    {info.details.birthday}
+                  </div>
+                )}
+                {info.details.place_of_birth && (
+                  <div>
+                    <span className="font-semibold">Place of Birth : </span>
+                    {info.details.place_of_birth}
+                  </div>
+                )}
+                {info.details.gender && (
+                  <div>
+                    <span className="font-semibold">Gender : </span>
+                    {info.details.gender === 2 ? "Male" : "Female"}
+                  </div>
+                )}
+                {info.details.also_known_as?.length > 0 && (
+                  <div>
+                    <span className="font-semibold">Also Known As : </span>
+                    <div className="flex flex-wrap gap-1 mt-1">
+                      {info.details.also_known_as
+                        .slice(0, 3)
+                        .map((name, index) => (
+                          <span
+                            key={index}
+                            className="bg-zinc-800 px-2 py-1 rounded text-sm"
+                          >
+                            {name}
+                          </span>
+                        ))}
+                      {info.details.also_known_as.length > 3 && (
+                        <span className="bg-zinc-800 px-2 py-1 rounded text-sm">
+                          +{info.details.also_known_as.length - 3} more
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-8">
+            <h2 className="text-2xl text-white font-bold mb-6">Known For</h2>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+              {(info.combinedCredits.cast || info.combinedCredits.crew)
+                .slice(0, 5)
+                .map((credit) => (
+                  <Link
+                    to={`/${credit.media_type}/details/${credit.id}`}
+                    key={`${credit.id}-${credit.credit_id || Math.random()}`}
+                    className="bg-zinc-900 rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300 hover:shadow-lg hover:shadow-[#6556CD]/30"
+                  >
+                    {credit.poster_path || credit.backdrop_path ? (
+                      <img
+                        className="w-full h-40 object-cover"
+                        src={`https://image.tmdb.org/t/p/original/${
+                          credit.poster_path || credit.backdrop_path
+                        }`}
+                        alt={credit.title || credit.name}
+                      />
+                    ) : (
+                      <div className="w-full h-40 bg-zinc-800 flex items-center justify-center text-zinc-400">
+                        No image available
+                      </div>
+                    )}
+
+                    <div className="p-3">
+                      <h3 className="text-white font-medium truncate">
+                        {credit.title || credit.name}
+                      </h3>
+                      <p className="text-zinc-400 text-sm mt-1 truncate">
+                        {credit.character && `as ${credit.character}`}
+                        {credit.job && credit.job}
+                      </p>
+                    </div>
+                  </Link>
+                ))}
+            </div>
           </div>
         </div>
       </div>
@@ -173,23 +188,3 @@ const Persondetails = () => {
 };
 
 export default Persondetails;
-
-{
-  /* <div className="flex  gap-x-10 p-5">
-              <a target="_blank" href={info.details.homepage}>
-                <img className="w-[4vh] rounded-md" src={website} alt="" />
-              </a>
-              <a
-                target="_blank"
-                href={`https://www.wikidata.org/wiki/${info.externalid.wikidata_id}`}
-              >
-                <img className="w-[4vh] rounded-md" src={wikipedia} alt="" />
-              </a>
-              <a
-                target="_blank"
-                href={`https://www.imdb.com/title/${info.externalid.imdb_id}`}
-              >
-                <img className="w-[4vh] rounded-md" src={imdb} alt="" />
-              </a>
-            </div> */
-}

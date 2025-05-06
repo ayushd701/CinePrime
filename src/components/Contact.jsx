@@ -1,46 +1,58 @@
 import React from "react";
 
 const Contact = () => {
-  document.title= "Contact us"
-  const items = [
+  document.title = "Contact Us";
+  const contactItems = [
     {
       name: "Email",
       link: "mailto:dixitayush363@gmail.com",
-      icon: <i class="ri-mail-line mr-2"></i>,
+      icon: <i className="ri-mail-line text-2xl"></i>,
+      color: "text-red-400 hover:text-red-300",
     },
     {
       name: "LinkedIn",
       link: "https://www.linkedin.com/in/ayush-dixit-0107ad",
-      icon: <i class="ri-linkedin-box-fill mr-2"></i>,
+      icon: <i className="ri-linkedin-box-fill text-2xl"></i>,
+      color: "text-blue-400 hover:text-blue-300",
     },
     {
       name: "GitHub",
       link: "https://github.com/ayushd701",
-      icon: <i class="ri-github-fill mr-2"></i>,
+      icon: <i className="ri-github-fill text-2xl"></i>,
+      color: "text-gray-200 hover:text-white",
     },
   ];
+
   return (
-    <div className="bg-[#1F1E24] w-full h-screen flex justify-center items-center">
-      <div className="w-[50%] h-auto rounded-lg p-[2%] hover:scale-105 duration-500 bg-gray-600 overflow-hidden">
-        <div className="flex justify-center flex-col items-center h-[90%]">
-          <h1 className=" text-3xl font-extrabold text-blue-200">
+    <div className="bg-[#1F1E24] w-full min-h-screen flex items-center justify-center p-6">
+      <div className="w-full max-w-2xl bg-[#2D2B32] rounded-xl p-8 transition-all duration-300 hover:shadow-lg hover:shadow-[#6556CD]/30">
+        <div className="text-center mb-8">
+          <h1 className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#6556CD] to-[#8B7AE4] mb-4">
             Get in Touch
           </h1>
-          <p className="mt-[3%] text-lg text-white">
-            Looking forward to connecting! Feel free to reach out through the
-            contact details below.
+          <p className="text-lg md:text-xl text-zinc-300">
+            Looking forward to connecting! Feel free to reach out through any of the channels below.
           </p>
         </div>
-        <ul className="flex justify-around text-gray-300 text-xl mt-[3%]">
-          {items.map((item, index) => (
-            <li key={index}>
-              {item.icon}
-              <a  className="cursor-pointer" href={item.link} target="_blank" rel="noopener noreferrer">
-                {item.name}
-              </a>
-            </li>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          {contactItems.map((item, index) => (
+            <a
+              key={index}
+              href={item.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`flex flex-col items-center justify-center p-6 rounded-lg bg-[#3A3841] hover:bg-[#4A4752] transition-all duration-300 ${item.color}`}
+            >
+              <div className="text-4xl mb-3">{item.icon}</div>
+              <span className="text-lg font-medium">{item.name}</span>
+            </a>
           ))}
-        </ul>
+        </div>
+
+        <div className="mt-8 text-center text-zinc-400 text-sm">
+          <p>I typically respond within 24 hours</p>
+        </div>
       </div>
     </div>
   );
